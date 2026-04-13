@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- VSS schedule for leader braking events -->
+<vss>
+    <!-- Normal driving until t=40s -->
+    <step time="0.0" speed="33.33"/>
+    <!-- Event 1: Hard brake t=40-42s (reduce to ~25 m/s, simulating ~4 m/s² decel over 2s) -->
+    <step time="40.0" speed="15.0"/>
+    <!-- Resume normal after event 1 -->
+    <step time="42.0" speed="33.33"/>
+    <!-- Event 2: Hard brake t=80-81.5s (reduce, simulating ~3.5 m/s² decel over 1.5s) -->
+    <step time="80.0" speed="18.0"/>
+    <!-- Resume normal after event 2 -->
+    <step time="81.5" speed="33.33"/>
+</vss>

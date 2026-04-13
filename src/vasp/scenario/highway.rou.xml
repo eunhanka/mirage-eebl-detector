@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes>
+    <vType id="idm_car" accel="1.4" decel="2.0" sigma="0.0"
+           length="5.0" minGap="2.0" maxSpeed="33.33"
+           speedFactor="1.0" speedDev="0.0"
+           carFollowModel="IDM" tau="1.5" guiShape="passenger" color="0,128,255"/>
+
+    <route id="highway_route" edges="highway"/>
+
+    <vehicle id="vehicle_0" type="idm_car" route="highway_route"
+             depart="0" departPos="600.0" departSpeed="21.0"/>
+    <vehicle id="vehicle_1" type="idm_car" route="highway_route"
+             depart="0" departPos="570.0" departSpeed="24.0"/>
+    <vehicle id="vehicle_2" type="idm_car" route="highway_route"
+             depart="0" departPos="540.0" departSpeed="24.1"/>
+    <vehicle id="vehicle_3" type="idm_car" route="highway_route"
+             depart="0" departPos="510.0" departSpeed="26.9"/>
+    <vehicle id="vehicle_4" type="idm_car" route="highway_route"
+             depart="0" departPos="480.0" departSpeed="20.8"/>
+    <vehicle id="vehicle_5" type="idm_car" route="highway_route"
+             depart="0" departPos="450.0" departSpeed="21.8"/>
+    <vehicle id="vehicle_6" type="idm_car" route="highway_route"
+             depart="0" departPos="420.0" departSpeed="24.8"/>
+    <vehicle id="vehicle_7" type="idm_car" route="highway_route"
+             depart="0" departPos="390.0" departSpeed="24.5"/>
+    <vehicle id="vehicle_8" type="idm_car" route="highway_route"
+             depart="0" departPos="360.0" departSpeed="26.3"/>
+    <vehicle id="vehicle_9" type="idm_car" route="highway_route"
+             depart="0" departPos="330.0" departSpeed="24.4"/>
+    <vehicle id="vehicle_10" type="idm_car" route="highway_route"
+             depart="0" departPos="300.0" departSpeed="25.8"/>
+    <vehicle id="vehicle_11" type="idm_car" route="highway_route"
+             depart="0" departPos="270.0" departSpeed="26.1"/>
+    <vehicle id="vehicle_12" type="idm_car" route="highway_route"
+             depart="0" departPos="240.0" departSpeed="26.0"/>
+    <vehicle id="vehicle_13" type="idm_car" route="highway_route"
+             depart="0" departPos="210.0" departSpeed="24.7"/>
+    <vehicle id="vehicle_14" type="idm_car" route="highway_route"
+             depart="0" departPos="180.0" departSpeed="21.9"/>
+    <vehicle id="vehicle_15" type="idm_car" route="highway_route"
+             depart="0" departPos="150.0" departSpeed="24.9"/>
+    <vehicle id="vehicle_16" type="idm_car" route="highway_route"
+             depart="0" departPos="120.0" departSpeed="20.9"/>
+    <vehicle id="vehicle_17" type="idm_car" route="highway_route"
+             depart="0" departPos="90.0" departSpeed="26.5"/>
+    <vehicle id="vehicle_18" type="idm_car" route="highway_route"
+             depart="0" departPos="60.0" departSpeed="23.6"/>
+    <vehicle id="vehicle_19" type="idm_car" route="highway_route"
+             depart="0" departPos="30.0" departSpeed="26.5"/>
+</routes>

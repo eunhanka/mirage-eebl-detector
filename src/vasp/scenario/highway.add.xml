@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Additional file for leader braking events (Paper §6.2).
+  Uses variable speed signs to force leader deceleration.
+
+  Event 1: t=40-42s, target speed drops to simulate a=-4.0 m/s²
+  Event 2: t=80-81.5s, target speed drops to simulate a=-3.5 m/s²
+
+  Note: In VASP/VEINS, use TraCI commands instead (see traci_braking.py).
+  This file is for standalone SUMO testing only.
+-->
+<additional>
+    <!-- Variable Speed Sign on the highway edge -->
+    <variableSpeedSign id="vss_leader" lanes="highway_0" file="vss_schedule.xml"/>
+
+    <!-- Bus stop trick: force vehicle_0 to stop briefly (alternative approach) -->
+    <!-- Uncomment if VSS doesn't work well with IDM car-following -->
+    <!--
+    <busStop id="brake_point_1" lane="highway_0" startPos="800" endPos="810"/>
+    <busStop id="brake_point_2" lane="highway_0" startPos="1600" endPos="1610"/>
+    -->
+</additional>
