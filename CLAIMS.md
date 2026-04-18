@@ -46,6 +46,13 @@ scheduler tie-breaking on identical timestamps can shift per-BSM classification
 counts by ~0.5 %. A ±0.015 band on F1 comfortably covers this while still
 catching any substantive regression.
 
+**Auto-scaling for fewer seeds.** `verify_results.py` automatically widens the
+tolerance bands by a factor of sqrt(5/N) when the reviewer runs with N < 5
+seeds (for example, Tier 2 `run_single_seed.sh`). This reflects the standard
+statistical fact that the variance of a mean scales as 1/N. At N=1, bands are
+widened by sqrt(5) ≈ 2.24x; at N=5 the scaling is 1.0. Pass `--no-scale` to
+force paper-exact tolerances regardless of N.
+
 
 ## C2: Balanced Per-Attack Coverage (paper §7.3, Figure 5)
 

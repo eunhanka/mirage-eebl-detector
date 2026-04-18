@@ -49,10 +49,11 @@ numbers without having to execute all 90 simulation runs themselves.
 ## What is NOT in this directory
 
 - **Raw per-run detlog CSVs** (5-seed × 18-config ≈ 1.8 GB). These were too
-  large for git and have been archived separately, the DOI is listed in
-  the main `README.md`. Re-running `run_multi_seed.sh` regenerates them.
-- **OMNeT++ `.vec` / `.sca` scalar files** (~5.7 GB total). Archived on
-  the same Zenodo DOI.
+  large for git and have been archived separately. The Zenodo DOI is
+  [10.5281/zenodo.19639253](https://doi.org/10.5281/zenodo.19639253).
+  Re-running `run_multi_seed.sh` regenerates them locally.
+- **OMNeT++ `.vec` / `.sca` scalar files** (~5.7 GB total). Archived on the
+  same Zenodo DOI.
 
 ## Provenance
 
