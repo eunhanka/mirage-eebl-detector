@@ -1,4 +1,4 @@
-# MIRAGE — Claims for Artifact Evaluation
+# MIRAGE: Claims for Artifact Evaluation
 
 This document enumerates the quantitative claims made in the MIRAGE paper
 (*VehicleSec '26*) and the expected tolerance for each when the artifact is
@@ -24,9 +24,8 @@ re-executed. An automated checker is provided at
 Claims below report mean ± standard deviation across the 5 seeds unless
 otherwise stated.
 
----
 
-## C1 — Aggregate Effectiveness (paper §7.1, Table 4)
+## C1: Aggregate Effectiveness (paper §7.1, Table 4)
 
 **MIRAGE achieves F1 = 0.922 ± 0.001 at Θ = 0.55**, with TPR = 0.883 ± 0.003,
 FPR = 0.009 ± 0.001, and Precision = 0.965 ± 0.007.
@@ -47,16 +46,8 @@ scheduler tie-breaking on identical timestamps can shift per-BSM classification
 counts by ~0.5 %. A ±0.015 band on F1 comfortably covers this while still
 catching any substantive regression.
 
-**Auto-scaling for fewer seeds.** `verify_results.py` automatically widens the
-tolerance bands by $\sqrt{5/N}$ when the reviewer runs with $N < 5$ seeds
-(e.g.\ Tier 2 `run_single_seed.sh`). This reflects the standard statistical
-fact that the variance of a mean scales as $1/N$. At $N=1$, bands are
-widened by $\sqrt{5} \approx 2.24\times$; at $N=5$ the scaling is $1.0$.
-Pass `--no-scale` to force paper-exact tolerances regardless of $N$.
 
----
-
-## C2 — Balanced Per-Attack Coverage (paper §7.3, Figure 5)
+## C2: Balanced Per-Attack Coverage (paper §7.3, Figure 5)
 
 **MIRAGE is the only detector that sustains high TPR on both attack variants.**
 
@@ -75,9 +66,8 @@ per variant. The reviewer output should show both values in the tolerance
 bands above, and the per-attack bar pattern in `reference_results/figures/
 fig3_per_attack.png` should be reproduced qualitatively.
 
----
 
-## C3 — Baseline Comparison (paper §7.2, Table 4)
+## C3: Baseline Comparison (paper §7.2, Table 4)
 
 **MIRAGE substantially outperforms all three baselines in aggregate F1.**
 
@@ -93,9 +83,8 @@ detectors (`B1_*`, `B2_*`, `B3_*`, `P_*`) and reports the ranking. The critical
 check is the ordering `F1(P) > F1(B1) > F1(B2) > F1(B3)`; each absolute value
 is additionally checked against its tolerance band.
 
----
 
-## C4 — Threshold Robustness (paper §7.4, Figure 6)
+## C4: Threshold Robustness (paper §7.4, Figure 6)
 
 **MIRAGE is robust to the exact choice of Θ within a stable band:**
 
@@ -122,9 +111,8 @@ confirm C1 (F1 ≥ 0.907 after tolerance) and verify qualitatively that
 `reference_results/figures/fig5_sensitivity.png` matches the expected stable
 region.
 
----
 
-## C5 — IDM Mitigation (paper §7.5)
+## C5: IDM Mitigation (paper §7.5)
 
 **The IDM mitigation layer reduces mean braking severity by ≈ 75 % compared
 to the undefended baseline.**
@@ -142,7 +130,6 @@ reduction is 75 % ± 10 %.
 Qualitative comparison: the reviewer plot should broadly match
 `reference_results/figures/fig_mitigation.png`.
 
----
 
 ## What is *not* claimed
 
@@ -155,7 +142,6 @@ Qualitative comparison: the reviewer plot should broadly match
   classes (position-offset, dimension-offset, etc.) are not part of these
   claims.
 
----
 
 ## How to verify
 
@@ -177,7 +163,6 @@ Full re-run (5 seeds, ~1 hour):
 The verifier exits 0 when every enabled claim is within tolerance, and
 non-zero otherwise, so it can be dropped into CI.
 
----
 
 ## Pre-computed reference material
 
@@ -190,5 +175,5 @@ non-zero otherwise, so it can be dropped into CI.
 
 Raw per-run CSV logs are *not* tracked in git due to size; they are archived
 on Zenodo alongside this release. Reviewers who want bit-exact reference data
-can download the archive, but it is not required for evaluation — every claim
+can download the archive, but it is not required for evaluation, every claim
 is reproducible from a fresh install.

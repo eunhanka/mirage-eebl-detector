@@ -6,7 +6,7 @@ numbers without having to execute all 90 simulation runs themselves.
 
 ## Contents
 
-### `figures/` — Paper figures (identical to the submission)
+### `figures/`: Paper figures (identical to the submission)
 
 | File | Paper location | What it shows |
 |---|---|---|
@@ -16,7 +16,7 @@ numbers without having to execute all 90 simulation runs themselves.
 | `fig_ablation.png`, `.pdf` | §7.6 | Ablation study |
 | `fig_mitigation.png`, `.pdf` | §7.5 | Deceleration reduction by IDM mitigation |
 
-### `tables/` — LaTeX source of paper tables
+### `tables/`: LaTeX source of paper tables
 
 | File | Paper location | Contents |
 |---|---|---|
@@ -49,8 +49,8 @@ numbers without having to execute all 90 simulation runs themselves.
 ## What is NOT in this directory
 
 - **Raw per-run detlog CSVs** (5-seed × 18-config ≈ 1.8 GB). These were too
-  large for git and have been archived separately — the DOI is:
-  [10.5281/zenodo.19639253](https://doi.org/10.5281/zenodo.19639253). Re-running `run_multi_seed.sh` regenerates them.
+  large for git and have been archived separately, the DOI is listed in
+  the main `README.md`. Re-running `run_multi_seed.sh` regenerates them.
 - **OMNeT++ `.vec` / `.sca` scalar files** (~5.7 GB total). Archived on
   the same Zenodo DOI.
 
@@ -60,7 +60,7 @@ numbers without having to execute all 90 simulation runs themselves.
 |---|---|
 | Original run date | 2026-02-24 |
 | Host CPU | (as in paper §6, footnote) |
-| Compiler | Clang 14 (host) — note: our final install pipeline uses GCC 9.4 |
+| Compiler | Clang 14 (host), note: our final install pipeline uses GCC 9.4 |
 | OMNeT++ | 5.6.2 |
 | SUMO | 1.8.0 |
 | Veins | 5.2 (commit `c5b4d7c4`) |

@@ -1,9 +1,5 @@
 # MIRAGE: Detecting Fake EEBL Attacks in V2X Networks via Event-Gated Behavioral Analysis
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19639253.svg)](https://doi.org/10.5281/zenodo.19639253)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Ubuntu](https://img.shields.io/badge/Ubuntu-20.04%20LTS-orange.svg)](https://releases.ubuntu.com/20.04/)
-
 This is the artifact accompanying the paper **"MIRAGE: Detecting Fake
 Emergency Electronic Brake Light Attacks in V2X Networks via Event-Gated
 Behavioral Analysis"** (*VehicleSec '26*). The preprint is at
@@ -14,7 +10,6 @@ Built on top of [VASP](https://github.com/quic/vasp) /
 [SUMO 1.8.0](https://sumo.dlr.de/) /
 [OMNeT++ 5.6.2](https://omnetpp.org/).
 
----
 
 ## Table of contents
 
@@ -29,7 +24,6 @@ Built on top of [VASP](https://github.com/quic/vasp) /
 9. [Citation](#citation)
 10. [License and acknowledgments](#license-and-acknowledgments)
 
----
 
 ## Overview
 
@@ -39,10 +33,10 @@ evidence:
 
 | Stage | Checks | Target |
 |---|---|---|
-| 1 — Context Assessment | TTC plausibility, new-sender detection | Suspicious EEBL context |
-| 2 — Deceleration Plausibility | Physical limits, cross-field consistency, brake-speed mismatch | Kinematic anomalies |
-| 3 — Behavioral Consistency | Trajectory, position-derived speed, position-speed mismatch | A1 trajectory divergence |
-| 4 — Post-Stop Consistency | Frozen position detection | A2 post-attack artifacts |
+| 1. Context Assessment | TTC plausibility, new-sender detection | Suspicious EEBL context |
+| 2. Deceleration Plausibility | Physical limits, cross-field consistency, brake-speed mismatch | Kinematic anomalies |
+| 3. Behavioral Consistency | Trajectory, position-derived speed, position-speed mismatch | A1 trajectory divergence |
+| 4. Post-Stop Consistency | Frozen position detection | A2 post-attack artifacts |
 | IDM Mitigation | Physics-based deceleration bounding | Fail-safe for missed detections |
 
 ## Key results
@@ -59,7 +53,6 @@ variants**: 77.0 % on A1 (NoStop) and 99.7 % on A2 (WithStop). The IDM
 mitigation layer reduces mean braking severity by ≈ 75 %. Full paper
 claims and tolerances: [`CLAIMS.md`](CLAIMS.md).
 
----
 
 ## Quick start for artifact reviewers
 
@@ -97,7 +90,6 @@ cd -
 ./scripts/verify_results.py --all --seeds 0 1 2 3 4
 ```
 
----
 
 ## Repository layout
 
@@ -120,7 +112,7 @@ cd -
     │   ├── driver/
     │   │   ├── CarApp.cc / .h / .ned # Extended with detection logging + IDM mitigation
     │   ├── mdm/
-    │   │   └── MisbehaviorDetectors.h# All detectors (B0–B3, Proposed, NoGate) inline
+    │   │   └── MisbehaviorDetectors.h# All detectors (B0 to B3, Proposed, NoGate) inline
     │   └── scenario/
     │       ├── omnetpp.ini           # 18 experimental configurations
     │       ├── highway.{net,rou,add,launchd,sumocfg}.xml
@@ -133,7 +125,7 @@ cd -
     │       └── analyze_multi_seed.py # Multi-seed aggregation
     └── reference_results/
         ├── figures/                  # Paper figures (PNG + PDF)
-        ├── tables/                   # LaTeX sources for Tables 4–6
+        ├── tables/                   # LaTeX sources for Tables 4 to 6
         └── README.md                 # How to interpret
 
 The sanity of every path above is enforced by `scripts/lib/05_mirage.sh`
@@ -158,7 +150,6 @@ before the build runs.
 Detection threshold Θ = 0.55 at the operating point; see paper §7.4 for
 the sensitivity analysis over Θ ∈ [0.0, 1.0].
 
----
 
 ## Re-running from scratch
 
@@ -181,7 +172,7 @@ tag so reviewers can reproduce bit-by-bit builds:
 | OMNeT++ | 5.6.2 | upstream release tarball |
 | SUMO | 1.8.0 | tag `v1_8_0` |
 | Veins | 5.2 | `c5b4d7c4fab0e2b23f78d2e4f90a7ebc512db596` (tag `veins-5.2`) |
-| VASP | — | `0ec4af324f3ed729690f1cbd1b1143ebd7f4d6f4` |
+| VASP |, | `0ec4af324f3ed729690f1cbd1b1143ebd7f4d6f4` |
 
 Changing these versions is not supported and may break the build because
 C++ interface changes between OMNeT++ / Veins versions.
@@ -194,8 +185,8 @@ skips the build.
 
 ```bash
 sudo ./scripts/install.sh deps      # apt + pip + C++ headers
-sudo ./scripts/install.sh omnetpp   # ~20–40 min on 4 cores; ~1 min rebuild
-sudo ./scripts/install.sh sumo      # ~5–10 min
+sudo ./scripts/install.sh omnetpp   # ~20 to 40 min on 4 cores; ~1 min rebuild
+sudo ./scripts/install.sh sumo      # ~5 to 10 min
 sudo ./scripts/install.sh veins     # Veins + vanilla VASP build
 sudo ./scripts/install.sh mirage    # MIRAGE overlay, rebuild
 # or, all stages in one command:
@@ -209,12 +200,11 @@ The final scenario tree lives at
 `/opt/mirage/veins-5.2/src/vasp/scenario/`, which is the working
 directory for all `./run` invocations.
 
----
 
 ## Reproduction expectations
 
 - `scripts/install.sh all` completes with exit code 0 on a fresh
-  Ubuntu 20.04 host; total wall-clock ≈ 10–25 minutes depending on CPU.
+  Ubuntu 20.04 host; total wall-clock ≈ 10 to 25 minutes depending on CPU.
 - `scripts/quick_test.sh` produces a detection log of at least a few
   thousand rows with several hundred `suspicious=1` entries. On the
   authors' Docker clean-room (Ubuntu 20.04, 16 vCPU), the 120 s
@@ -230,7 +220,6 @@ Exact numerical claims and their tolerances are documented in
 [`CLAIMS.md`](CLAIMS.md); reference figures are in
 [`reference_results/`](reference_results/).
 
----
 
 ## Troubleshooting
 
@@ -252,7 +241,7 @@ automatically on port 9999.
 **SIGSEGV at "Event #0".** This was caused by a duplicate
 `ProposedIDMDetector.cc/.h` file triggering an ODR violation on GCC.
 The duplicate has been removed from the repository; if you see this
-symptom, your working tree may be out of date — `git pull` and rebuild.
+symptom, your working tree may be out of date, `git pull` and rebuild.
 
 **Port 9999 in use.** A previous `veins_launchd` instance may have
 survived; `pkill -f veins_launchd` clears it.
@@ -268,7 +257,6 @@ detection logs live at `/opt/mirage/veins-5.2/src/vasp/scenario/results/
 detlog-<config>-<seed>-<timestamp>-<pid>.csv`. Set
 `MIRAGE_RESULTS=/your/path` if you moved them.
 
----
 
 ## Citation
 
