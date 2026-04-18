@@ -1,0 +1,26 @@
+\begin{table}[t]
+\centering
+\caption{Ablation study: impact of removing individual checks on overall and per-attack performance.}
+\label{tab:ablation}
+\small
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+ & \multicolumn{2}{c}{\textbf{Overall}} & \multicolumn{2}{c}{$\mathcal{A}_1$} & \multicolumn{2}{c}{$\mathcal{A}_2$} \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
+\textbf{Configuration} & \textbf{F1} & $\Delta$\textbf{F1} & \textbf{TPR} & $\Delta$\textbf{TPR} & \textbf{TPR} & $\Delta$\textbf{TPR} \\
+\midrule
+Full Model & 0.922 & --- & 0.769 & --- & 0.997 & --- \\
+\midrule
+$-$Check~1a & 0.921 & -0.001 & 0.763 & -0.006 & 0.997 & +0.000 \\
+$-$Check~1a' & 0.916 & -0.006 & 0.743 & -0.026 & 0.996 & -0.001 \\
+$-$Check~1b & 0.922 & -0.000 & 0.768 & -0.001 & 0.997 & +0.000 \\
+$-$Check~2a & 0.922 & +0.000 & 0.769 & +0.000 & 0.997 & +0.000 \\
+$-$Check~2b & 0.930 & +0.008 & 0.761 & -0.008 & 0.997 & +0.000 \\
+$-$Check~2c & 0.921 & -0.001 & 0.761 & -0.008 & 0.997 & +0.000 \\
+$-$Check~3a & 0.922 & +0.000 & 0.768 & -0.001 & 0.997 & +0.000 \\
+$-$Check~3b & 0.866 & -0.056 & 0.547 & -0.222 & 0.997 & +0.000 \\
+$-$Check~3c & 0.930 & +0.008 & 0.761 & -0.008 & 0.997 & +0.000 \\
+$-$Check~4 & 0.555 & -0.368 & 0.769 & +0.000 & 0.022 & -0.974 \\
+\bottomrule
+\end{tabular}
+\end{table}

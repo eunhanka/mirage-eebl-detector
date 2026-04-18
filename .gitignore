@@ -6,11 +6,16 @@ out/
 *.vci
 *.sca
 *.elog
-results/detlog-*.csv
-results/rxtrace-*.csv
-results/figures/
-results/*.tex
-results/*.csv
+# Scenario simulation outputs (only inside scenario dir)
+src/vasp/scenario/results/detlog-*.csv
+src/vasp/scenario/results/rxtrace-*.csv
+src/vasp/scenario/results/figures/
+src/vasp/scenario/results/*.tex
+src/vasp/scenario/results/*.csv
+# Generic 'results' inside scenario (not 'reference_results' at root)
+src/vasp/scenario/results/*.sca
+src/vasp/scenario/results/*.vec
+src/vasp/scenario/results/*.vci
 *.bak
 *.old
 *.orig

@@ -1,0 +1,23 @@
+\begin{table}[t]
+\centering
+\caption{Detection latency: time from first attack BSM to first detection per ego vehicle.}
+\label{tab:latency}
+\small
+\begin{tabular}{@{}llcccc@{}}
+\toprule
+\textbf{Detector} & \textbf{Attack} & \textbf{Mean (s)} & \textbf{Median (s)} & \textbf{BSMs Missed} & \textbf{Det. Rate} \\
+\midrule
+B1: Threshold & $\mathcal{A}_1$ & $1.54 \pm 4.98$ & $0.14$ & $160.1 \pm 518.2$ & 0.97 \\
+ & $\mathcal{A}_2$ & $1.80 \pm 2.77$ & $0.10$ & $201.6 \pm 321.3$ & 0.97 \\
+\midrule
+B2: VCADS & $\mathcal{A}_1$ & $0.24 \pm 0.27$ & $0.20$ & $21.3 \pm 4.4$ & 0.97 \\
+ & $\mathcal{A}_2$ & --- & --- & --- & 0.00 \\
+\midrule
+B3: F2MD/VASP & $\mathcal{A}_1$ & $1.07 \pm 3.85$ & $0.03$ & $114.4 \pm 405.9$ & 1.00 \\
+ & $\mathcal{A}_2$ & $9.66 \pm 16.85$ & $0.00$ & $1042.1 \pm 1819.9$ & 1.00 \\
+\midrule
+Proposed (Ours) & $\mathcal{A}_1$ & $0.14 \pm 0.23$ & $0.10$ & $10.9 \pm 2.1$ & 0.97 \\
+ & $\mathcal{A}_2$ & $0.29 \pm 0.39$ & $0.30$ & $24.6 \pm 11.2$ & 0.97 \\
+\bottomrule
+\end{tabular}
+\end{table}
