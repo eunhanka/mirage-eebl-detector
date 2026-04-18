@@ -1,5 +1,9 @@
 # MIRAGE: Detecting Fake EEBL Attacks in V2X Networks via Event-Gated Behavioral Analysis
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19639253.svg)](https://doi.org/10.5281/zenodo.19639253)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Ubuntu](https://img.shields.io/badge/Ubuntu-20.04%20LTS-orange.svg)](https://releases.ubuntu.com/20.04/)
+
 This is the artifact accompanying the paper **"MIRAGE: Detecting Fake
 Emergency Electronic Brake Light Attacks in V2X Networks via Event-Gated
 Behavioral Analysis"** (*VehicleSec '26*). The preprint is at
