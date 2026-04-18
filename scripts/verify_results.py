@@ -66,10 +66,13 @@ CLAIMS = {
 
 # Column names emitted by CarApp.cc's detlog writer:
 #   time,hv_id,rv_id,attack_type,det_name,suspicious,score,reason,ttc,mitigated_a
-# attack_type is an int; 0 = benign, 10 = A1 NoStop, 11 = A2 WithStop.
-ATTACK_TYPE_BENIGN = 0
-ATTACK_TYPE_A1     = 10
-ATTACK_TYPE_A2     = 11
+# attack_type is a string label; suspicious is a continuous [0,1] detector
+# score that becomes a positive prediction when it crosses SUSPICIOUS_THETA.
+# Labels and threshold mirror analyze_multi_seed.py (ATTACK_MAP, THETA=0.55).
+ATTACK_TYPE_BENIGN = "Genuine"
+ATTACK_TYPE_A1     = "FakeEEBLJustAttack"
+ATTACK_TYPE_A2     = "FakeEEBLStopPositionUpdateAfterAttack"
+SUSPICIOUS_THETA   = 0.55
 
 
 # -----------------------------------------------------------------------------
@@ -171,8 +174,8 @@ def read_counts(csv_path: Path, attack_filter: Optional[int] = None,
                 return c
             for row in reader:
                 try:
-                    atype = int(row["attack_type"])
-                    susp  = int(row["suspicious"])
+                    atype = row["attack_type"]
+                    susp = float(row["suspicious"]) >= SUSPICIOUS_THETA
                 except (KeyError, ValueError):
                     continue
                 is_attack = atype != ATTACK_TYPE_BENIGN

@@ -9,6 +9,24 @@
 set -e
 cd "$(dirname "$0")"
 
+# Auto-start veins_launchd so reviewers can invoke this script standalone
+# (run_single_seed.sh does the same thing — see lines 73-87 there).
+SUMO_PORT="${SUMO_PORT:-9999}"
+VEINS_DIR="${VEINS_DIR:-/opt/mirage/veins-5.2}"
+pkill -f "veins_launchd.*-p ${SUMO_PORT}" 2>/dev/null || true
+sleep 1
+"${VEINS_DIR}/bin/veins_launchd" -c sumo -p "${SUMO_PORT}" -v \
+    > "/tmp/mirage_multi_seed_launchd.log" 2>&1 &
+LAUNCHD_PID=$!
+sleep 2
+if ! kill -0 "${LAUNCHD_PID}" 2>/dev/null; then
+    echo "ERROR: veins_launchd died immediately"
+    cat /tmp/mirage_multi_seed_launchd.log
+    exit 1
+fi
+echo "veins_launchd started (PID ${LAUNCHD_PID})"
+trap 'echo "Stopping veins_launchd (PID ${LAUNCHD_PID})"; kill "${LAUNCHD_PID}" 2>/dev/null || true' EXIT
+
 N_SEEDS=5
 
 RED='\033[0;31m'
