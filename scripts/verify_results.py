@@ -123,31 +123,37 @@ class Mitigation:
 # CSV reading
 # -----------------------------------------------------------------------------
 def find_detlogs(results_dir: Path, config: str, seeds: Optional[List[int]]) -> List[Path]:
-    """Find detlog-<config>-<run>-<timestamp>-<pid>.csv files.
+    """Find detlog-<config>-*.csv files, optionally filtered by seed.
 
-    We match on filename prefix 'detlog-<config>-'. If seeds are specified,
-    we interpret the first run index ('-<run>-') as the seed: the convention
-    used by `run_multi_seed.sh` is to pass `--seed <N>` through OMNeT++'s
-    `${runid}` parameter, which ends up as the run number before the first
-    timestamp hyphen.
+    Seed inference is layout-aware:
+      * Multi-seed layout (run_multi_seed.sh): each seed's detlogs live in
+        results/seed{N}/. We infer seed = int(parent_dir.name[4:]).
+      * Single-seed layout (run_single_seed.sh): all detlogs sit directly
+        under results/. There is only one seed (the one the user passed),
+        so every file belongs to each requested seed. We return all of them
+        when the requested set is non-empty.
+
+    The OMNeT++ filename component between the config and timestamp is the
+    run index (always 0 because we do not use OMNeT++ parameter sweeps),
+    not the seed, so it is ignored here.
     """
     pattern = f"detlog-{config}-*.csv"
-    candidates = sorted(results_dir.glob(pattern))
+    candidates = sorted(results_dir.rglob(pattern))
     if seeds is None:
         return candidates
     wanted = set(seeds)
     matched = []
     for p in candidates:
-        # filename format: detlog-{config}-{seed}-{timestamp}-{pid}.csv
-        stem = p.stem  # no .csv
-        parts = stem.split("-", 3)   # ['detlog', '{config}', '{seed}', '{rest}']
-        if len(parts) >= 3:
-            try:
-                if int(parts[2]) in wanted:
-                    matched.append(p)
-            except ValueError:
-                # Non-integer in third slot; include if we can't tell.
+        parent = p.parent.name
+        # Multi-seed layout: parent dir is "seed<N>".
+        if parent.startswith("seed") and parent[4:].isdigit():
+            if int(parent[4:]) in wanted:
                 matched.append(p)
+            continue
+        # Single-seed layout: no seed subdir. Include every candidate
+        # because the user ran exactly one seed and asked for that seed
+        # (or a superset including it) by passing --seeds.
+        matched.append(p)
     return matched
 
 
@@ -193,15 +199,16 @@ def read_counts(csv_path: Path, attack_filter: Optional[int] = None,
                     else:    c.tn += 1
 
                 # Mitigation tally (attack rows only).
+                # Filter matches analyze_multi_seed.py fig_mitigation():
+                # mitigated_a must be nonzero (IDM produced a bound) AND
+                # < 0.5 m/s^2 (actual braking, excludes free-flow cruising
+                # when the ghost is too far away to constrain the ego).
                 if mitigation is not None and is_attack:
                     try:
-                        raw = abs(float(row.get("score", 0.0)))  # not what we want
-                    except ValueError:
-                        pass
-                    try:
                         mit_a = float(row.get("mitigated_a", 0.0))
-                        mitigation.n += 1
-                        mitigation.mit_abs_sum += abs(mit_a)
+                        if mit_a != 0 and mit_a < 0.5:
+                            mitigation.n += 1
+                            mitigation.mit_abs_sum += abs(mit_a)
                     except (ValueError, TypeError):
                         pass
     except FileNotFoundError:
@@ -343,30 +350,12 @@ def verify_c5(results_dir: Path, seeds: Optional[List[int]]) -> bool:
         return False
     mit_mean = mit.mit_abs_sum / mit.n
 
-    # Baseline deceleration = raw |a| from B0_A* detlogs. In those runs
-    # mitigated_a is 0 (Naive applies no bound), so we need the 'a' field.
-    # Some detlog layouts may not export 'a' separately; fall back to the
-    # paper's reference ~4.0 m/s^2 if absent.
-    base_mean = 4.0
-    samples = 0
-    running_sum = 0.0
-    for cfg in ["B0_A1", "B0_A2"]:
-        for p in find_detlogs(results_dir, cfg, seeds):
-            try:
-                with p.open("r", newline="") as f:
-                    reader = csv.DictReader(f)
-                    for row in reader:
-                        try:
-                            a = float(row.get("mitigated_a", 0.0))
-                        except ValueError:
-                            continue
-                        if a != 0:
-                            running_sum += abs(a)
-                            samples += 1
-            except FileNotFoundError:
-                continue
-    if samples > 0:
-        base_mean = running_sum / samples
+    # Reference deceleration: the -8.0 m/s^2 (~0.8g) maximum emergency
+    # braking that an unprotected EEBL response would command. This matches
+    # paper section 7.5 ("compared to the -8.0 m/s^2 (~0.8g) maximum
+    # emergency braking that an unprotected EEBL response would command")
+    # and the reduction formula in analyze_multi_seed.py:570.
+    base_mean = 8.0
 
     reduction = 1.0 - (mit_mean / base_mean) if base_mean > 0 else 0.0
     ref, tol = spec["target_reduction"]
@@ -406,7 +395,7 @@ def main(argv: Optional[List[str]] = None) -> int:
               file=sys.stderr)
         return 2
 
-    found = list(args.results_dir.glob("detlog-*.csv"))
+    found = list(args.results_dir.rglob("detlog-*.csv"))
     if not found:
         print(f"[ERROR] no detlog-*.csv files found in {args.results_dir}",
               file=sys.stderr)

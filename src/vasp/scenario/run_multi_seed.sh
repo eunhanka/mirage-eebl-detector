@@ -10,7 +10,7 @@ set -e
 cd "$(dirname "$0")"
 
 # Auto-start veins_launchd so reviewers can invoke this script standalone
-# (run_single_seed.sh does the same thing — see lines 73-87 there).
+# (run_single_seed.sh does the same thing; see lines 73-87 there).
 SUMO_PORT="${SUMO_PORT:-9999}"
 VEINS_DIR="${VEINS_DIR:-/opt/mirage/veins-5.2}"
 pkill -f "veins_launchd.*-p ${SUMO_PORT}" 2>/dev/null || true

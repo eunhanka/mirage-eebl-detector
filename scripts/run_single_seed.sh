@@ -4,7 +4,7 @@
 #
 # Run every experiment configuration (baseline + attacks + ablations) for a
 # single seed. Use this for a quick end-to-end reproduction; a full 5-seed
-# run is ~5x longer — see run_multi_seed.sh for that.
+# run is approximately 5x longer; see run_multi_seed.sh for that.
 #
 # Usage:
 #   ./scripts/run_single_seed.sh [seed]
