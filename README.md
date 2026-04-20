@@ -1,6 +1,6 @@
 # MIRAGE: Detecting Fake EEBL Attacks in V2X Networks via Event-Gated Behavioral Analysis
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19640264.svg)](https://doi.org/10.5281/zenodo.19640264)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19639252.svg)](https://doi.org/10.5281/zenodo.19639252)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Ubuntu](https://img.shields.io/badge/Ubuntu-20.04%20LTS-orange.svg)](https://releases.ubuntu.com/20.04/)
 
