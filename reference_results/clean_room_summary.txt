@@ -1,0 +1,60 @@
+=== MIRAGE Final Clean-Room Verification (Zenodo v2) ===
+Artifact source: Zenodo v2 zip
+  URL: https://zenodo.org/records/19659074
+  DOI: 10.5281/zenodo.19659074
+  MD5: 8786d04de2bc6cad06df8cbea5014f93   (verified in 03_download.log)
+Container: mirage-cleanroom-v3 (ubuntu:20.04, --cpus 16 --memory 16g, fresh)
+
+Start: 2026-04-19T23:53:09-07:00
+End:   2026-04-20T01:48:46-07:00
+Wall:  6937 s (1h 55m 37s)
+
+=== Stage results ===
+Stage 2  apt setup                          exit=0
+Stage 3  Zenodo download + unzip            exit=0   md5 verified
+Stage 4  install.sh all                     exit=0   duration=420s
+Stage 5  quick_test.sh                      exit=0   (Total rows: 327868, Quick test PASSED)
+Stage 6  run_single_seed.sh 0               exit=0   duration=992s  (18/18 configs OK)
+Stage 7  verify --seeds 0                   exit=0   4/4 PASS? yes
+Stage 8  analyze_multi_seed.py (single)     exit=0   figs=14 (10 fig + 4 tex)
+Stage 9  run_multi_seed.sh 0..4             exit=0   detlogs=90     duration=4750s
+Stage 10 verify --seeds 0..4                exit=0   4/4 PASS? yes
+Stage 11 analyze_multi_seed.py (multi)      exit=0   figs=14 (10 fig + 4 tex)
+Stage 12 figure comparison                  missing=0  extra=4 (tex tables only)
+
+=== Key metrics (multi-seed = paper) ===
+  [OK]   F1           0.9223  (ref 0.9220 ± 0.0150)
+  [OK]   TPR          0.8829  (ref 0.8830 ± 0.0200)
+  [OK]   FPR          0.0089  (ref 0.0090 ± 0.0050)
+  [OK]   Precision    0.9654  (ref 0.9650 ± 0.0150)
+  [OK]   TPR[A1]      0.7691  (ref 0.7700 ± 0.0300)
+  [OK]   TPR[A2]      0.9966  (ref 0.9970 ± 0.0100)
+  [OK]   F1[B1]       0.7341  (ref 0.7330 ± 0.0200)
+  [OK]   F1[B2]       0.6084  (ref 0.6070 ± 0.0400)
+  [OK]   F1[B3]       0.1936  (ref 0.1930 ± 0.0200)
+  [OK]   F1[P]        0.9223  (ref 0.9220 ± 0.0150)
+  [OK]   Ranking (P > B1 > B2 > B3) matches paper
+  [OK]   C5 reduction in tolerance (73.3%, ref 75% ± 10%)
+
+=== Single-seed (Stage 7) ===
+  [OK]   F1           0.9225  (ref 0.9220 ± 0.0150)
+  [OK]   TPR          0.8824  (ref 0.8830 ± 0.0200)
+  [OK]   FPR          0.0088  (ref 0.0090 ± 0.0050)
+  [OK]   Precision    0.9664  (ref 0.9650 ± 0.0150)
+  [OK]   TPR[A1]      0.7682  (ref 0.7700 ± 0.0300)
+  [OK]   TPR[A2]      0.9965  (ref 0.9970 ± 0.0100)
+  [OK]   F1[B1]       0.7333  (ref 0.7330 ± 0.0200)
+  [OK]   F1[B2]       0.6196  (ref 0.6070 ± 0.0400)
+  [OK]   F1[B3]       0.1942  (ref 0.1930 ± 0.0200)
+  [OK]   F1[P]        0.9225  (ref 0.9220 ± 0.0150)
+  [OK]   Ranking (P > B1 > B2 > B3) matches paper
+  [OK]   C5 reduction in tolerance (73.1%, ref 75% ± 10%)
+
+=== Paper comparison ===
+Paper Table 4: F1=0.922  TPR=0.883  FPR=0.009  Precision=0.965
+Observed  5s: F1=0.9223 TPR=0.8829 FPR=0.0089 Precision=0.9654   (match)
+Paper Table 5: reduction ~=75%
+Observed  5s: reduction=73.3%   (within ±10% tolerance)
+
+=== Verdict ===
+READY FOR HOTCRP SUBMISSION

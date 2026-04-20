@@ -46,12 +46,14 @@ scheduler tie-breaking on identical timestamps can shift per-BSM classification
 counts by ~0.5 %. A ±0.015 band on F1 comfortably covers this while still
 catching any substantive regression.
 
-**Auto-scaling for fewer seeds.** `verify_results.py` automatically widens the
-tolerance bands by a factor of sqrt(5/N) when the reviewer runs with N < 5
-seeds (for example, Tier 2 `run_single_seed.sh`). This reflects the standard
-statistical fact that the variance of a mean scales as 1/N. At N=1, bands are
-widened by sqrt(5) ≈ 2.24x; at N=5 the scaling is 1.0. Pass `--no-scale` to
-force paper-exact tolerances regardless of N.
+**Single-seed runs.** When the reviewer runs with a single seed (e.g. Tier 2
+`run_single_seed.sh`), the observed metrics may differ from the 5-seed paper
+values by more than the nominal tolerance bands above due to per-seed variance.
+In practice, the clean-room single-seed verification on seed 0 produces
+F1=0.9225 (reference 0.922), TPR=0.8824 (reference 0.883), FPR=0.0088
+(reference 0.009), and Precision=0.9664 (reference 0.965), all within the
+same tolerance bands listed in the table (see
+`reference_results/verify_single_seed.txt` for the verbatim output).
 
 
 ## C2: Balanced Per-Attack Coverage (paper §7.3, Figure 5)

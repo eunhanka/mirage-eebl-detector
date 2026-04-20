@@ -1,0 +1,36 @@
+Reading detlogs from: /opt/mirage/veins-5.2/src/vasp/scenario/results
+Detlogs found:        18
+Seed filter:          [0]
+
+==> C1: MIRAGE aggregate effectiveness (Θ=0.55)
+  [OK]   F1           0.9225  (ref 0.9220 ± 0.0150)
+  [OK]   TPR          0.8824  (ref 0.8830 ± 0.0200)
+  [OK]   FPR          0.0088  (ref 0.0090 ± 0.0050)
+  [OK]   Precision    0.9664  (ref 0.9650 ± 0.0150)
+
+==> C2: MIRAGE balanced per-attack coverage
+  [OK]   TPR[A1]      0.7682  (ref 0.7700 ± 0.0300)
+  [OK]   TPR[A2]      0.9965  (ref 0.9970 ± 0.0100)
+
+==> C3: Baseline comparison (F1 ranking + absolute)
+  [OK]   F1[B1]       0.7333  (ref 0.7330 ± 0.0200)
+  [OK]   F1[B2]       0.6196  (ref 0.6070 ± 0.0400)
+  [OK]   F1[B3]       0.1942  (ref 0.1930 ± 0.0200)
+  [OK]   F1[P]        0.9225  (ref 0.9220 ± 0.0150)
+  [OK]   Ranking (P > B1 > B2 > B3) matches paper
+
+==> C5: IDM mitigation reduces mean braking severity ~75%
+  mean |a|      baseline:   8.000 m/s^2
+  mean |a|      mitigated:  2.153 m/s^2
+  reduction:                73.1% (ref 75% ± 10%)
+  [OK]   C5 reduction in tolerance
+
+============================================================
+Summary
+============================================================
+  C1: PASS
+  C2: PASS
+  C3: PASS
+  C5: PASS
+
+4 / 4 claims within tolerance
