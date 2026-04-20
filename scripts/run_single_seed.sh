@@ -101,6 +101,12 @@ CONFIGS=(
 )
 
 cd "${SCENARIO_DIR}"
+
+# Clear any stale detlogs from previous runs (e.g., quick_test.sh) so that
+# verify_results.py sees only this seed's fresh output. Matches the pattern
+# used in run_multi_seed.sh.
+rm -f results/detlog-*.csv
+
 PASS=0; FAIL=0
 for cfg in "${CONFIGS[@]}"; do
     log "  ${cfg} (seed ${SEED}) ..."
