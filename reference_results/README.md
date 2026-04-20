@@ -10,20 +10,30 @@ numbers without having to execute all 90 simulation runs themselves.
 
 | File | Paper location | What it shows |
 |---|---|---|
-| `fig2_roc.png`, `.pdf` | §7.1 Fig. 2 | ROC curves for each detector |
-| `fig3_per_attack.png`, `.pdf` | §7.3 Fig. 5 | Per-attack TPR bar chart |
-| `fig5_sensitivity.png`, `.pdf` | §7.4 Fig. 6 | F1/TPR/FPR vs threshold Θ |
-| `fig_ablation.png`, `.pdf` | §7.6 | Ablation study |
-| `fig_mitigation.png`, `.pdf` | §7.5 | Deceleration reduction by IDM mitigation |
+| `fig2_roc.png`, `.pdf` | Supplementary | ROC curves across detectors (not in paper; supports C1/C3) |
+| `fig3_per_attack.png`, `.pdf` | Section 7, Fig. 5 | Per-attack TPR bar chart (supports C2) |
+| `fig5_sensitivity.png`, `.pdf` | Section 7, Fig. 6 | F1/TPR/FPR vs threshold Θ (supports C4) |
+| `fig_ablation.png`, `.pdf` | Section 7, Fig. 7 | Detection check ablation study |
+| `fig_mitigation.png`, `.pdf` | Supplementary | Deceleration reduction by IDM mitigation (not in paper; paper Table 5 provides the tabular form; supports C5) |
 
 ### `tables/`: LaTeX source of paper tables
 
 | File | Paper location | Contents |
 |---|---|---|
-| `tab_comparison.tex` | §7.2 Table 4 | Aggregate TPR/FPR/Precision/F1 per detector |
-| `tab_ablation.tex` | §7.6 | MIRAGE ablation study |
-| `tab_latency.tex` | §8 | Detection latency per attack |
-| `tab_mitigation.tex` | §7.5 | Deceleration severity with / without mitigation |
+| `tab_comparison.tex` | Section 7, Table 4 | Aggregate TPR/FPR/Precision/F1 per detector |
+| `tab_ablation.tex` | Section 7 | MIRAGE ablation study |
+| `tab_latency.tex` | Section 8 | Detection latency per attack |
+| `tab_mitigation.tex` | Section 7, Table 5 | Deceleration severity with / without mitigation |
+
+### Verifier outputs (from the clean-room v3 run, Zenodo-based)
+
+| File | Contents |
+|---|---|
+| `verify_single_seed.txt` | Verbatim verifier output for `--seeds 0` (single-seed) |
+| `verify_multi_seed.txt` | Verbatim verifier output for `--seeds 0 1 2 3 4` (five seeds, paper-matching) |
+| `clean_room_summary.txt` | Stage-by-stage exit codes, wall-clock timings, and key metrics from the full clean-room verification |
+
+Reviewers can diff their own runs against these files to confirm bit-identical verifier behavior on a matching platform.
 
 ## How to compare your re-run to these reference values
 
